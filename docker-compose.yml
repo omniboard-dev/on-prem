@@ -32,6 +32,7 @@ services:
       - api-admin-password
 
   omniboard-db:
+    platform: linux/x86_64 # M1 workaround
     image: mysql:5.7.37
     command: --default-authentication-plugin=mysql_native_password
     restart: always
