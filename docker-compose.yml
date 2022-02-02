@@ -1,5 +1,6 @@
 services:
   omniboard-app:
+    platform: linux/x86_64 # M1 workaround
     image: omniboard/omniboard-app
     restart: always
     ports:
