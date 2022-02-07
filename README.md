@@ -51,3 +51,10 @@ The data volume can be removed using the `docker compose down -v` command, pleas
 ## DB Administration (optional)
 
 Database can be accessed and managed using the provided `Adminer` image which will by default run at [http://localhost:8090](http://localhost:8090)
+
+# Troubleshooting
+
+## Can't log into DB
+
+Sometimes the first invocation of `docker compose up` ends up in a state where DB configuration was not resolved correctly.
+In that case, try toremove the generated data volume using the `docker compose down -v` command, please be extremely careful as running this will result in loosing of all the data.
