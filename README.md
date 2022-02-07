@@ -57,4 +57,4 @@ Database can be accessed and managed using the provided `Adminer` image which wi
 ## Can't log into DB
 
 Sometimes the first invocation of `docker compose up` ends up in a state where DB configuration was not resolved correctly.
-In that case, try toremove the generated data volume using the `docker compose down -v` command, please be extremely careful as running this will result in loosing of all the data.
+In that case, try to remove the generated data volume using the `docker compose down -v` command, please be extremely careful as running this will result in loosing of all the data.
