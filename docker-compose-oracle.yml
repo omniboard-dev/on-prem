@@ -1,0 +1,51 @@
+services:
+  omniboard-app:
+    platform: linux/x86_64 # M1 workaround
+    image: omniboard/omniboard-app
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      API_URL: http://localhost:8080
+      CONFIG_VARS: API_URL
+
+  omniboard-api:
+    image: omniboard/omniboard-api
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      OB_ORG_NAME: 'Awesome Inc.'
+      OB_ORG_ADMIN_EMAIL: admin@awesome.com
+      OB_ORG_ADMIN_PASSWORD_FILE: /run/secrets/api-admin-password
+      ENV: docker
+      TZ: UTC
+      PORT: 8080
+      OB_JWT_SECRET: something_unique_doesnt_really_matter_what
+      OB_DB_DATABASE_TYPE: oracle
+      OB_DB_HOST: omniboard-db
+      OB_DB_DATABASE: omniboard
+      OB_DB_USERNAME: system
+      OB_DB_PASSWORD: oracle
+    secrets:
+      - api-admin-password
+
+  omniboard-db:
+    platform: linux/x86_64 # M1 workaround
+    image: oracleinanutshell/oracle-xe-11g:1.0.0
+    restart: always
+    volumes:
+      - omniboard-db-data:/var/lib/oracle
+
+volumes:
+  omniboard-db-data:
+
+secrets:
+  db-user:
+    file: ./db-user
+  db-user-password:
+    file: ./db-user-password
+  db-root-password:
+    file: ./db-root-password
+  api-admin-password:
+    file: ./api-admin-password
