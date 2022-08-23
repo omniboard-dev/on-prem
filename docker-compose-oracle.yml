@@ -10,7 +10,7 @@ services:
       CONFIG_VARS: API_URL
 
   omniboard-api:
-    image: omniboard/omniboard-api
+    image: omniboard/omniboard-api-oracle:2.24.0
     restart: always
     ports:
       - 8080:8080
@@ -33,6 +33,8 @@ services:
   omniboard-db:
     platform: linux/x86_64 # M1 workaround
     image: oracleinanutshell/oracle-xe-11g:1.0.0
+    environment:
+      ORACLE_ALLOW_REMOTE: true
     restart: always
     volumes:
       - omniboard-db-data:/var/lib/oracle
